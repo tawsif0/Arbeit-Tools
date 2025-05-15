@@ -1,16 +1,25 @@
-// controllers/unitConverterController.js
 exports.convertUnits = (req, res) => {
   const { input, fromUnit, toUnit } = req.body;
-  const conversionRates = {
-    meter: { kilometer: 0.001, mile: 0.000621371 },
-    kilometer: { meter: 1000, mile: 0.621371 },
-    mile: { meter: 1609.34, kilometer: 1.60934 }
+
+  // Conversion rates to meters
+  const toMeters = {
+    meter: 1,
+    kilometer: 1000,
+    mile: 1609.34,
+    cm: 0.01,
+    ft: 0.3048,
+    inch: 0.0254,
   };
 
-  if (conversionRates[fromUnit] && conversionRates[fromUnit][toUnit]) {
-    const result = input * conversionRates[fromUnit][toUnit];
-    res.json({ result });
-  } else {
-    res.status(400).json({ message: "Invalid conversion units" });
+  if (!(fromUnit in toMeters) || !(toUnit in toMeters)) {
+    return res.status(400).json({ message: "Invalid conversion units" });
   }
+
+  // Convert input to meters
+  const valueInMeters = input * toMeters[fromUnit];
+
+  // Convert meters to target unit
+  const result = valueInMeters / toMeters[toUnit];
+
+  res.json({ result });
 };

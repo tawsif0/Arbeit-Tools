@@ -1,0 +1,209 @@
+:root {
+  --unit-primary: #6c5ce7;
+  --unit-secondary: #a66efa;
+  --error: #ff4757;
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+}
+
+.converter-glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.converter-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.converter-header h2 {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: var(--unit-primary);
+}
+
+.converter-body {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.converter-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.converter-input:focus {
+  outline: none;
+  border-color: var(--unit-primary);
+  box-shadow: 0 0 15px rgba(108, 92, 231, 0.2);
+}
+
+.input-decoration {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 40px;
+  height: 40px;
+  background: var(--unit-secondary);
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.unit-selectors {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.unit-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  appearance: none;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236C5CE7%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
+    no-repeat right 0.8rem center/12px auto;
+}
+
+.swap-btn {
+  background: var(--unit-primary);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swap-btn:hover {
+  transform: rotate(180deg) scale(1.1);
+  background: var(--unit-secondary);
+}
+
+.convert-btn {
+  background: linear-gradient(
+    45deg,
+    var(--unit-primary),
+    var(--unit-secondary)
+  );
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.convert-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.result-card {
+  background: rgba(108, 92, 231, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.result-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.result-unit {
+  color: var(--unit-primary);
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.error-message {
+  background: rgba(255, 71, 87, 0.1);
+  color: var(--error);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-icon {
+  background: var(--error);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .converter-glass {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .unit-selectors {
+    gap: 0.5rem;
+  }
+}
