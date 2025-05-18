@@ -1,0 +1,98 @@
+/* QRCodeGenerator.css */
+.qr-card {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+  max-width: 500px;
+  margin: 2rem auto;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.qr-card:hover {
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3) !important;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+.neon-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid #ff69b4 !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  transition: all 0.3s ease !important;
+  padding: 15px !important;
+  font-size: 1.1rem !important;
+}
+
+.neon-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.neon-input:focus {
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3) !important;
+  border-color: #ff8e53 !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.btn-glow {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e53) !important;
+  border: none !important;
+  color: white !important;
+  padding: 15px 30px !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  font-size: 1.1rem;
+  width: 100%;
+  margin-top: 1rem;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 105, 180, 0.4) !important;
+}
+
+.btn-glow:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qr-container {
+  margin-top: 2rem;
+  text-align: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.qr-image {
+  border: 3px solid #ff69b4;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+  transition: transform 0.3s ease;
+  width: 200px;
+  height: 200px;
+}
+
+.qr-image:hover {
+  transform: rotate(3deg) scale(1.05);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
