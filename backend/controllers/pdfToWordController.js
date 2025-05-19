@@ -15,9 +15,9 @@ async function convertPdfToDocx(pdfFilePath, outputFilePath) {
     {
       headers: {
         ...form.getHeaders(),
-        Apikey: CLOUDMERSIVE_API_KEY
+        Apikey: CLOUDMERSIVE_API_KEY,
       },
-      responseType: "arraybuffer"
+      responseType: "arraybuffer",
     }
   );
 
@@ -44,7 +44,11 @@ exports.convertPdfToWord = async (req, res) => {
   const inputFilePath = path.resolve(req.file.path);
   const outputDir = path.dirname(inputFilePath);
   const originalBaseName = path.parse(req.file.originalname).name;
-  const outputFilePath = path.join(outputDir, `${originalBaseName}.docx`);
+  const timestamp = Date.now(); // to make the filename unique
+  const outputFilePath = path.join(
+    outputDir,
+    `${originalBaseName}_${timestamp}.docx`
+  );
 
   try {
     await convertPdfToDocx(inputFilePath, outputFilePath);

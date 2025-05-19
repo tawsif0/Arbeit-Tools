@@ -1,0 +1,246 @@
+:root {
+  --love-primary: #ff4d6d;
+  --love-secondary: #ff758f;
+  --love-background: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+}
+
+.love-glass-container {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 77, 109, 0.2);
+  overflow: hidden;
+}
+
+.love-heart-bg {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(var(--love-primary) 0%, transparent 70%);
+  opacity: 0.1;
+  top: -50px;
+  left: -50px;
+  animation: heartAnimation 3s infinite;
+}
+
+@keyframes heartAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.love-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.love-icon {
+  font-size: 3rem;
+  color: var(--love-primary);
+  margin-bottom: 1rem;
+}
+
+.love-header h2 {
+  color: var(--text-dark);
+  margin: 0.5rem 0;
+  font-size: 2rem;
+}
+
+.love-header p {
+  color: var(--text-light);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.love-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.love-input-group {
+  position: relative;
+}
+
+.love-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid #ffe5e9;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(255, 77, 109, 0.1);
+}
+
+.love-input:focus {
+  outline: none;
+  border-color: var(--love-primary);
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.3);
+}
+
+.love-heart-divider {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.love-divider-icon {
+  color: var(--love-primary);
+  font-size: 2rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.love-calculate-btn {
+  background: linear-gradient(
+    45deg,
+    var(--love-primary),
+    var(--love-secondary)
+  );
+  color: white;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.love-calculate-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 25px rgba(255, 77, 109, 0.3);
+}
+
+.love-btn-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(-30deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.love-error-message {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.love-result-card {
+  background: rgba(255, 77, 109, 0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-top: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.love-percentage {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--love-primary);
+  margin-bottom: 0.5rem;
+}
+
+.love-compatibility-text {
+  color: var(--text-dark);
+  font-size: 1.2rem;
+}
+
+.love-heart-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.love-particle {
+  position: absolute;
+  color: var(--love-primary);
+  opacity: 0.3;
+  animation: float 3s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(20deg);
+  }
+}
+
+.love-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

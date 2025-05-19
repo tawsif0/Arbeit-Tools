@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {
+  FiUpload,
+  FiFileText,
+  FiDownload,
+  FiAlertCircle,
+} from "react-icons/fi";
+import "./PDFConverter.css";
 
 const PDFConverter = () => {
   const [file, setFile] = useState(null);
@@ -45,40 +52,70 @@ const PDFConverter = () => {
       setLoading(false);
     }
   };
-
   return (
-    <div className="card p-4 shadow-sm">
-      <h3>PDF Converter</h3>
-      <input
-        type="file"
-        className="form-control mb-3"
-        accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.html"
-        onChange={handleFileChange}
-      />
+    <div className="pdf-converter-glass">
+      <div className="pdf-header">
+        <FiFileText className="header-icon" />
+        <h2>File to PDF Converter</h2>
+        <p>Convert various formats to PDF</p>
+      </div>
+
+      <div className="file-upload-area">
+        <input
+          type="file"
+          id="pdfFileInput"
+          onChange={handleFileChange}
+          accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.html"
+        />
+        <label htmlFor="pdfFileInput" className="upload-label">
+          <FiUpload className="upload-icon" />
+          {file ? (
+            <span className="file-name">{file.name}</span>
+          ) : (
+            <>
+              <span>Choose File</span>
+              <span className="supported-formats">
+                (DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT, HTML)
+              </span>
+            </>
+          )}
+        </label>
+      </div>
+
       <button
-        className="btn btn-primary"
+        className="convert-btn"
         onClick={handleConvert}
         disabled={!file || loading}
       >
-        {loading ? "Converting..." : "Convert to PDF"}
+        {loading ? (
+          <div className="spinner" />
+        ) : (
+          <>
+            <FiFileText className="btn-icon" />
+            Convert to PDF
+          </>
+        )}
       </button>
 
-      {error && <div className="alert alert-danger mt-3">{error}</div>}
+      {error && (
+        <div className="error-message">
+          <FiAlertCircle className="error-icon" />
+          {error}
+        </div>
+      )}
 
       {downloadUrl && (
-        <div className="mt-3">
-          <a
-            href={downloadUrl}
-            download={`${file.name.split(".")[0]}.pdf`}
-            className="btn btn-success"
-            onClick={() => {
-              // Release the blob URL after download to avoid memory leaks
-              setTimeout(() => URL.revokeObjectURL(downloadUrl), 100);
-            }}
-          >
-            Download PDF
-          </a>
-        </div>
+        <a
+          href={downloadUrl}
+          download={`${file.name.split(".")[0]}.pdf`}
+          className="download-btn"
+          onClick={() => {
+            setTimeout(() => URL.revokeObjectURL(downloadUrl), 100);
+          }}
+        >
+          <FiDownload className="btn-icon" />
+          Download PDF
+        </a>
       )}
     </div>
   );

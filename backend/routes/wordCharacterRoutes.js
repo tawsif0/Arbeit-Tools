@@ -1,10 +1,12 @@
-// routes/wordCharacterRoutes.js
 const express = require("express");
 const router = express.Router();
+
+// Make sure the controller function is correctly imported
 const {
-  countWordsAndCharacters
+  countWordsCharactersSentencesLines,
 } = require("../controllers/wordCharacterController");
 
-router.post("/count", countWordsAndCharacters);
+// Define your route with the correct handler
+router.post("/count", countWordsCharactersSentencesLines); // Ensure this handler is a function
 
 module.exports = router;
