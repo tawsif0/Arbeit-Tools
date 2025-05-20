@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const links = [
     { to: "/unit-converter", label: "Unit Converter" },
-    { to: "/pdf-converter", label: "PDF Converter" },
+    // { to: "/pdf-converter", label: "PDF Converter" },
     { to: "/image-converter", label: "Image Converter" },
     { to: "/hex-to-rgb", label: "Hex to RGB Converter" },
     { to: "/json-formatter", label: "JSON Formatter" },
@@ -22,7 +22,7 @@ const Navbar = () => {
     { to: "/love-calculator", label: "Love Calculator" },
     { to: "/gpa-calculator", label: "GPA Calculator" },
     { to: "/ip-lookup", label: "IP Lookup" },
-    { to: "/pdf-to-word-converter", label: "PDF to Word Converter" },
+    { to: "/pdf-to-word-converter", label: "PDF to Word Converter" }
   ];
 
   useEffect(() => {

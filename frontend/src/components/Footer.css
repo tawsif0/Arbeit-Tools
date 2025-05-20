@@ -1,0 +1,145 @@
+/* Footer Main */
+.footer-main {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Social Section */
+.footer-social-section {
+  border-bottom: 1px solid #18373f2c;
+}
+
+.footer-social-text span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3436;
+  letter-spacing: 0.3px;
+}
+
+/* Social Icons */
+.footer-icon-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(24, 55, 63, 0.08);
+  color: #2d3436 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(24, 55, 63, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.footer-icon-link:hover {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: #fff !important;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(24, 55, 63, 0.15);
+}
+
+/* Content Section */
+
+.logo-imgs {
+  max-width: 220px;
+  transition: transform 0.3s ease;
+}
+
+.footer-description {
+  color: #4a5568;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 420px;
+}
+
+/* Contact Section */
+.contact-wrapper {
+  padding-left: 1rem;
+}
+
+.footer-heading {
+  color: #18373f;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.3px;
+  padding-bottom: 0.75rem;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.footer-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 45px;
+  height: 3px;
+  background: linear-gradient(90deg, #18373f, #357180);
+  border-radius: 2px;
+}
+
+.contact-icon {
+  color: #29a5a5;
+  font-size: 1.2rem;
+  min-width: 28px;
+}
+
+.contact-link {
+  color: #2d3436 !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.contact-link:hover {
+  color: #357180 !important;
+}
+
+/* Copyright */
+.footer-copyright {
+  color: #6b7280;
+  font-size: 0.9rem;
+  border-top: 1px solid #18373f2c;
+}
+
+.footer-brand-link {
+  color: #3c9b93 !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: opacity 0.3s ease;
+}
+
+.footer-brand-link:hover {
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .footer-col {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .contact-wrapper {
+    padding-left: 0;
+  }
+
+  .logo-imgs {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-social-section {
+    text-align: center;
+  }
+
+  .footer-social-icons {
+    justify-content: center !important;
+    margin-top: 1rem;
+  }
+
+  .footer-description {
+    font-size: 1rem;
+  }
+}

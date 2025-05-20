@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 
 import UnitConverter from "./pages/UnitConverter";
-import PDFConverter from "./pages/PDFConverter";
+// import PDFConverter from "./pages/PDFConverter";
 import ImageConverter from "./pages/ImageConverter";
 import HexToRGBConverter from "./pages/HexToRGBConverter";
 import JSONFormatter from "./pages/JSONFormatter";
@@ -22,6 +22,7 @@ import GPACalculator from "./pages/GPACalculator";
 import IPLookup from "./pages/IPLookup";
 import PdfToWordConverter from "./pages/PdfTOWord";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -29,11 +30,10 @@ function App() {
       {/* Use Navbar here */}
       <Navbar />
 
-      <div className="container my-4">
+      <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/unit-converter" element={<UnitConverter />} />
-          <Route path="/pdf-converter" element={<PDFConverter />} />
           <Route path="/image-converter" element={<ImageConverter />} />
           <Route path="/hex-to-rgb" element={<HexToRGBConverter />} />
           <Route path="/json-formatter" element={<JSONFormatter />} />
@@ -61,6 +61,7 @@ function App() {
             element={<PdfToWordConverter />}
           />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

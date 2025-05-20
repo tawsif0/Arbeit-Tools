@@ -86,7 +86,6 @@
   background-color: white;
 }
 .navbar__tools-trigger:hover {
-  transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(138, 63, 251, 0.25);
 }
 .navbar__tools-trigger:hover::after {
@@ -141,6 +140,8 @@
 /* Dropdown grid items */
 .tools-grid__item {
   padding: 1.5rem;
+  width: 100%; /* Full width inside grid cell */
+  height: 90px; /* Set a fixed height for uniformity */
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   border: 1px solid var(--nav-border);
@@ -149,6 +150,11 @@
   position: relative;
   overflow: hidden;
   text-decoration: none;
+  box-sizing: border-box; /* Ensures padding doesn't increase size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .tools-grid__item:hover {
@@ -287,7 +293,7 @@
     text-align: center;
   }
   .tools-grid.mobile .tools-grid__item {
-    padding: 8px 12px;
+    padding: 12px 12px;
   }
   .navbar__container {
     padding: 1rem 1.5rem;
