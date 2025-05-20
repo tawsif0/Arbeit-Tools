@@ -113,9 +113,8 @@ const UnitConverter = () => {
         </button>
 
         {error && (
-          <div className="error-message">
-            <span className="error-icon">!</span>
-            {error}
+          <div className="json-alert json-alert-error">
+            <span className="json-alert-icon">⚠️</span> {error}
           </div>
         )}
 

@@ -1,43 +1,106 @@
-// components/JSONFormatter.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./json.css";
 
 const JSONFormatter = () => {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState("");
-
+  const [input, setInput] = useState(""); // User input (key-value pairs)
+  const [output, setOutput] = useState(""); // Formatted JSON output
+  const [error, setError] = useState(""); // Error message for invalid input
+  const [isValid, setIsValid] = useState(false); // Validity of the JSON
+  const [copyStatus, setCopyStatus] = useState(""); // Copy status message
+  // Format the user input into JSON
   const formatJSON = () => {
     try {
-      const parsed = JSON.parse(input);
-      setOutput(JSON.stringify(parsed, null, 4));
-      setError("");
-    } catch {
-      setError("Invalid JSON");
-      setOutput("");
+      // Attempt to create JSON structure from input string
+      const formattedInput = input
+        .split(",") // Split by commas for key-value pairs
+        .map((pair) => pair.split(":")) // Split each pair by colon
+        .reduce((acc, [key, value]) => {
+          acc[key.trim()] = value.trim();
+          return acc;
+        }, {});
+
+      setOutput(JSON.stringify(formattedInput, null, 2)); // Format into JSON
+      setError(""); // Clear error on successful conversion
+      setIsValid(true); // Mark the JSON as valid
+    } catch (err) {
+      setError("Invalid input format: " + err.message); // Handle any error
+      setOutput(""); // Clear output if invalid
+      setIsValid(false); // Mark the JSON as invalid
     }
   };
 
+  // Clear all data
+  const clearAll = () => {
+    setInput(""); // Reset input
+    setOutput(""); // Reset output
+    setError(""); // Reset error
+    setIsValid(false); // Reset validation state
+  };
+
+  // Copy formatted JSON to clipboard
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(output)
+      .then(() => {
+        setCopyStatus("Copied!");
+        setTimeout(() => setCopyStatus(""), 2000); // Reset after 2 seconds
+      })
+      .catch(() => setError("Failed to copy text"));
+  };
+
+  // Clear error message as soon as the user starts typing
+  useEffect(() => {
+    if (input !== "") {
+      setError(""); // Reset error when the user types something
+    }
+  }, [input]);
+
   return (
-    <div className="card p-4 shadow-sm">
-      <h3>JSON Formatter & Validator</h3>
-      <textarea
-        className="form-control mb-3"
-        rows="8"
-        placeholder="Paste JSON here"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      ></textarea>
-      <button className="btn btn-primary" onClick={formatJSON}>
-        Format JSON
-      </button>
-      {error && <div className="alert alert-danger mt-3">{error}</div>}
+    <div className="json-formatter">
+      <div className="json-header">
+        <h2 className="json-title">JSON Beautifier</h2>
+        <p className="json-subtitle">Format & Validate Data into JSON</p>
+      </div>
+
+      <div className="json-input-container">
+        <textarea
+          className={`json-textarea ${error && !isValid ? "json-error" : ""}`}
+          rows="8"
+          placeholder="Enter data like key:value, separated by commas..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        ></textarea>
+        <div className="json-button-group">
+          <button
+            className="json-button json-format-button"
+            onClick={formatJSON}
+          >
+            <span className="json-button-icon">✨</span> Convert to JSON
+          </button>
+          <button className="json-button json-clear-button" onClick={clearAll}>
+            <span className="json-button-icon">🗑️</span> Clear
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <div className="json-alert json-alert-error">
+          <span className="json-alert-icon">⚠️</span> {error}
+        </div>
+      )}
+
       {output && (
-        <pre
-          className="bg-light p-3 mt-3 rounded"
-          style={{ whiteSpace: "pre-wrap" }}
-        >
-          {output}
-        </pre>
+        <div className="json-result">
+          <div className="json-result-header">
+            <h3 className="json-result-title">Formatted JSON</h3>
+            <button className="json-copy-button" onClick={copyToClipboard}>
+              <span className="json-copy-icon">
+                {copyStatus ? "Copied!" : "📋 Copy"}
+              </span>
+            </button>
+          </div>
+          <pre className="json-output">{output}</pre>
+        </div>
       )}
     </div>
   );

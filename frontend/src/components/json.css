@@ -1,0 +1,217 @@
+:root {
+  --json-primary: #3b82f6;
+  --json-secondary: #6366f1;
+  --json-background: #ffffff;
+  --json-surface: #f8fafc;
+  --json-border: #e2e8f0;
+  --json-text: #1e293b;
+  --json-text-light: #64748b;
+  --json-error: #ef4444;
+  --json-success: #10b981;
+}
+
+.json-formatter {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: var(--json-background);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.json-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.json-title {
+  font-size: 2.5rem;
+  color: var(--json-primary);
+  margin-bottom: 0.5rem;
+}
+
+.json-subtitle {
+  color: var(--json-text-light);
+  font-size: 1rem;
+}
+
+.json-input-container {
+  margin-bottom: 1.5rem;
+}
+
+.json-textarea {
+  width: 100%;
+  padding: 1.5rem;
+  border: 2px solid var(--json-border);
+  border-radius: 0.75rem;
+  font-family: "Fira Code", monospace, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 200px;
+  transition: all 0.2s ease;
+  background: var(--json-surface);
+}
+
+.json-textarea:focus {
+  outline: none;
+  border-color: var(--json-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.json-textarea.json-error {
+  border-color: var(--json-error);
+}
+
+.json-button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.json-button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.json-format-button {
+  background: var(--json-primary);
+  color: white;
+}
+
+.json-format-button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.json-clear-button {
+  background: var(--json-surface);
+  color: var(--json-text-light);
+  border: 1px solid var(--json-border);
+}
+
+.json-clear-button:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.json-alert {
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.json-alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--json-error);
+  border: 1px solid var(--json-error);
+}
+
+.json-result {
+  margin-top: 2rem;
+  background: var(--json-surface);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--json-border);
+}
+
+.json-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.json-result-title {
+  color: var(--json-primary);
+  font-size: 1.25rem;
+}
+
+.json-copy-button {
+  padding: 0.5rem 1.25rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--json-primary);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.json-copy-button:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.json-output {
+  background: var(--json-background);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  color: var(--json-text);
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace, sans-serif;
+  line-height: 1.5;
+  border: 1px solid var(--json-border);
+  margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .json-formatter {
+    padding: 1.5rem;
+  }
+
+  .json-title {
+    font-size: 2rem;
+  }
+
+  .json-button-group {
+    flex-direction: column;
+  }
+
+  .json-textarea {
+    padding: 1rem;
+    min-height: 150px;
+  }
+
+  .json-output {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .json-formatter {
+    padding: 1rem;
+  }
+
+  .json-title {
+    font-size: 1.75rem;
+  }
+
+  .json-result-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .json-copy-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

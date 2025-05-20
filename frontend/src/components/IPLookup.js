@@ -66,7 +66,11 @@ const IPLookup = () => {
         </button>
       </div>
 
-      {error && <div className="ip-alert ip-alert-error">{error}</div>}
+      {error && (
+        <div className="json-alert json-alert-error">
+          <span className="json-alert-icon">⚠️</span> {error}
+        </div>
+      )}
 
       {result && (
         <div className="ip-results">

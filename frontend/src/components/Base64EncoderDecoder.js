@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FiLock, FiUnlock, FiCopy, FiAlertCircle } from "react-icons/fi";
+import { FiLock, FiUnlock, FiCopy } from "react-icons/fi";
 import "./Base64Styles.css";
 
 const Base64EncoderDecoder = () => {
@@ -94,9 +94,8 @@ const Base64EncoderDecoder = () => {
         </div>
 
         {error && (
-          <div className="error-message">
-            <FiAlertCircle className="error-icon" />
-            {error}
+          <div className="json-alert json-alert-error">
+            <span className="json-alert-icon">⚠️</span> {error}
           </div>
         )}
 

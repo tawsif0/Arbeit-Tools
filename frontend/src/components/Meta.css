@@ -144,7 +144,6 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .meta-generator {
-    margin: 1rem;
     padding: 1.5rem;
   }
 

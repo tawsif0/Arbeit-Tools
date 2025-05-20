@@ -22,6 +22,10 @@ const HTMLEncoderDecoder = () => {
   };
 
   const encodeHTML = () => {
+    if (!text) {
+      setError("Please enter some text to encode.");
+      return;
+    }
     try {
       setEncoded(encodeURIComponent(text));
       setDecoded(""); // Reset decoded value when encoding
@@ -33,6 +37,10 @@ const HTMLEncoderDecoder = () => {
   };
 
   const decodeHTML = () => {
+    if (!text) {
+      setError("Please enter some text to decode.");
+      return;
+    }
     try {
       // Check if the text is a valid encoded string before decoding
       if (isEncoded(text)) {
@@ -49,6 +57,10 @@ const HTMLEncoderDecoder = () => {
   };
 
   const handleCopy = (content) => {
+    if (!content) {
+      setError("No content to copy.");
+      return;
+    }
     navigator.clipboard
       .writeText(content)
       .then(() => {
