@@ -31,13 +31,12 @@ exports.generateQRCodeWithLogo = async (req, res) => {
     const qrWidth = qrImage.bitmap.width;
 
     // Max logo width/height = 40% of QR code width
-    const maxLogoSize = qrWidth * 0.4;
+    const maxLogoSize = qrWidth * 0.8;
 
     // Calculate scale factor (no upscale)
     const scaleFactor = Math.min(
       maxLogoSize / logo.bitmap.width,
-      maxLogoSize / logo.bitmap.height,
-      1
+      maxLogoSize / logo.bitmap.height
     );
 
     const logoWidth = logo.bitmap.width * scaleFactor;
@@ -46,7 +45,7 @@ exports.generateQRCodeWithLogo = async (req, res) => {
     await logo.resize(logoWidth, logoHeight);
 
     // Padding factor: 25% of logo size
-    const paddingFactor = 0.25;
+    const paddingFactor = 0.2;
 
     // Calculate padded background rectangle size
     const bgWidth = logoWidth * (1 + paddingFactor);

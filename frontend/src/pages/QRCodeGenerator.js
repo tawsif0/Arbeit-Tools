@@ -69,7 +69,11 @@ const QRCodeGenerator = () => {
       dotsOptions: { color: dotColor, type: pattern },
       backgroundOptions: { color: bgColor },
       image: logoObjectUrl,
-      imageOptions: { crossOrigin: "anonymous", margin: 20, imageSize: 0.35 },
+      imageOptions: {
+        crossOrigin: "anonymous",
+        margin: 5,
+        imageSize: 0.5,
+      },
     });
   }, [text, dotColor, bgColor, pattern, logoObjectUrl, qrCodeInstance]);
 
@@ -90,7 +94,9 @@ const QRCodeGenerator = () => {
           <span className="qrgen-input-icon">🔗</span>
         </div>
 
-        <label className="qrgen-file-label">
+        <label
+          className={`qrgen-file-label ${logoFile ? "file-selected" : ""}`}
+        >
           <input
             type="file"
             accept="image/*"

@@ -82,7 +82,8 @@
   padding: 12px 20px;
   border-radius: 16px;
   background: #d9e3ff;
-  box-shadow: 0 0 14px var(--shadow-glow);
+  border: 2px solid var(--input-bg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
 
@@ -292,18 +293,66 @@
   user-select: none;
 }
 
-.qrgen-download-icon {
-  font-size: 1.3rem;
-  user-select: none;
+.qrgen-file-label.file-selected .qrgen-file-button {
+  display: none;
 }
 
 @media (max-width: 680px) {
   .qrgen-wrapper {
-    margin: 1rem 0px;
-    padding: 20px 25px;
+    margin: 1rem;
+    padding: 20px;
   }
   .qrgen-preview {
-    width: 270px;
-    height: 270px;
+    width: 90vw;
+    max-width: 270px;
+    height: 90vw;
+    max-height: 270px;
+  }
+  .qrgen-input-group {
+    max-width: 100%;
+  }
+  .qrgen-input {
+    padding-left: 3rem; /* reduce left padding for smaller screens */
+  }
+
+  /* Hide "Add Logo" text if a file is selected */
+  .qrgen-file-label.file-selected .qrgen-file-button {
+    display: none;
+  }
+
+  .qrgen-color-group {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .qrgen-select {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .qrgen-file-name {
+    max-width: 230px;
+  }
+  .qrgen-pattern-group {
+    width: 100%;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+  .qrgen-download-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .qrgen-title {
+    font-size: 2rem;
+  }
+  .qrgen-input {
+    font-size: 0.9rem;
+  }
+
+  .qrgen-download-btn {
+    font-size: 0.9rem;
+    padding: 10px 0;
   }
 }
