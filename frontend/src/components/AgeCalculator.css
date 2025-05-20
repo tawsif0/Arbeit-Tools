@@ -1,0 +1,299 @@
+:root {
+  --dob-primary: #6c5ce7;
+  --dob-secondary: #a66efa;
+  --dob-background: #ffffff;
+  --dob-error: #ff4757;
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+}
+
+.dob-glass-container {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.dob-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dob-header h2 {
+  color: var(--text-dark);
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+}
+
+.dob-header p {
+  color: var(--text-light);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.dob-header-icon {
+  font-size: 2.5rem;
+  color: var(--dob-primary);
+  filter: drop-shadow(0 4px 6px rgba(108, 92, 231, 0.2));
+}
+
+.dob-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.dob-input-group {
+  position: relative;
+}
+
+.dob-input {
+  width: 100%;
+  padding: 2rem 1.5rem 2rem 2.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  background: transparent;
+  cursor: pointer;
+  appearance: none; /* Prevent default date picker */
+}
+
+.dob-input:focus {
+  outline: none;
+  border-color: var(--dob-primary);
+}
+
+.dob-input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dob-primary);
+}
+
+.dob-input-label {
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.dob-input:focus + .floating-label {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dob-input:focus ~ .dob-input-highlight {
+  width: 100%;
+}
+
+.dob-calculate-btn {
+  background: linear-gradient(45deg, var(--dob-primary), var(--dob-secondary));
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dob-calculate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.dob-btn-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(-30deg);
+  animation: shine 3s infinite;
+}
+
+.dob-result-card {
+  background: rgba(108, 92, 231, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dob-age-display {
+  text-align: center;
+}
+
+.dob-age-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dob-primary);
+  display: block;
+}
+
+.dob-age-label {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.dob-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.dob-particle {
+  position: absolute;
+  color: var(--dob-primary);
+  opacity: 0.3;
+  animation: float 3s infinite;
+}
+
+.dob-error-message {
+  background: rgba(255, 71, 87, 0.1);
+  color: var(--dob-error);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.dob-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(20deg);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dob-glass-container {
+    padding: 1.5rem;
+    margin: 1.5rem;
+  }
+
+  .dob-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .dob-header p {
+    font-size: 0.9rem;
+  }
+
+  .dob-input-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dob-input {
+    padding: 1.5rem 1rem 1.5rem 2.5rem;
+  }
+
+  .dob-calculate-btn {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .dob-result-card {
+    grid-template-columns: 1fr; /* Stack the result cards in a single column */
+  }
+
+  .dob-age-number {
+    font-size: 1.5rem;
+  }
+
+  .dob-age-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dob-glass-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .dob-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .dob-header p {
+    font-size: 0.8rem;
+  }
+
+  .dob-calculate-btn {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .dob-result-card {
+    padding: 1rem;
+  }
+
+  .dob-age-number {
+    font-size: 1.25rem;
+  }
+
+  .dob-age-label {
+    font-size: 0.75rem;
+  }
+}

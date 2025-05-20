@@ -31,8 +31,8 @@ const QRCodeGenerator = () => {
 
   useEffect(() => {
     const qr = new QRCodeStyling({
-      width: 360,
-      height: 360,
+      width: 260,
+      height: 260,
       data: text,
       dotsOptions: {
         color: dotColor,

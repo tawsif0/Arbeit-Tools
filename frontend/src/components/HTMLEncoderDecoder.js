@@ -1,96 +1,131 @@
 import React, { useState, useEffect } from "react";
+import "./HTMLEncoderDecoder.css";
 
 const HTMLEncoderDecoder = () => {
   const [text, setText] = useState("");
-  const [encoded, setEncoded] = useState("");
-  const [decoded, setDecoded] = useState("");
-  const [isEncodedHTML, setIsEncodedHTML] = useState(false);
-  const [error, setError] = useState("");
+  const [encoded, setEncoded] = useState(""); // Encoded result
+  const [decoded, setDecoded] = useState(""); // Decoded result
+  const [error, setError] = useState(""); // Error state
+  const [isEncodedHTML, setIsEncodedHTML] = useState(false); // Detect if it's encoded
+  const [copyStatus, setCopyStatus] = useState(""); // Copy status message
 
-  // Check if input contains HTML numeric entities like &#123;
-  const checkIsEncodedHTML = (str) => {
-    if (!str) return false;
-    return /&#\d+;/.test(str);
-  };
-
-  useEffect(() => {
-    setEncoded("");
-    setDecoded("");
-    setError("");
-    setIsEncodedHTML(checkIsEncodedHTML(text));
-  }, [text]);
-
-  const encodeHTML = () => {
-    if (!text.trim()) {
-      setError("Please enter text to encode.");
-      setEncoded("");
-      return;
-    }
-    setError("");
-    const encodedStr = text.replace(
-      /[\u00A0-\u9999<>&]/gim,
-      (char) => `&#${char.charCodeAt(0)};`
-    );
-    setEncoded(encodedStr);
-  };
-
-  const decodeHTML = () => {
-    if (!text.trim()) {
-      setError("Please enter encoded HTML text to decode.");
-      setDecoded("");
-      return;
-    }
-    setError("");
-    const decodedStr = text.replace(/&#(\d+);/g, (match, dec) =>
-      String.fromCharCode(dec)
-    );
-    setDecoded(decodedStr);
+  // Function to detect if the text is already encoded
+  const isEncoded = (text) => {
+    return /%[0-9A-F]{2}/i.test(text); // Check for encoded characters like "%20"
   };
 
   const onInputChange = (e) => {
     setText(e.target.value);
+    setError("");
+    setEncoded("");
+    setDecoded("");
   };
 
+  const encodeHTML = () => {
+    try {
+      setEncoded(encodeURIComponent(text));
+      setDecoded(""); // Reset decoded value when encoding
+      setIsEncodedHTML(true); // Set as encoded
+      setCopyStatus(""); // Reset copy status
+    } catch (e) {
+      setError("Error encoding text.");
+    }
+  };
+
+  const decodeHTML = () => {
+    try {
+      // Check if the text is a valid encoded string before decoding
+      if (isEncoded(text)) {
+        setDecoded(decodeURIComponent(text));
+        setEncoded(""); // Reset encoded value when decoding
+        setIsEncodedHTML(false); // Set as decoded
+        setCopyStatus(""); // Reset copy status
+      } else {
+        setError("The input text is not properly encoded.");
+      }
+    } catch (e) {
+      setError("Error decoding text.");
+    }
+  };
+
+  const handleCopy = (content) => {
+    navigator.clipboard
+      .writeText(content)
+      .then(() => {
+        setCopyStatus("Copied!");
+        setTimeout(() => setCopyStatus(""), 2000); // Reset after 2 seconds
+      })
+      .catch(() => setError("Failed to copy text"));
+  };
+
+  // Effect to detect if text is encoded or not when the input changes
+  useEffect(() => {
+    if (text) {
+      if (isEncoded(text)) {
+        setIsEncodedHTML(true); // It's encoded, so show decode button
+        setEncoded(""); // Clear encoded value
+        setDecoded(""); // Clear decoded value
+      } else {
+        setIsEncodedHTML(false); // It's not encoded, so show encode button
+        setEncoded(""); // Clear encoded value
+        setDecoded(""); // Clear decoded value
+      }
+    }
+  }, [text]);
+
   return (
-    <div className="card p-4 shadow-sm">
-      <h3>HTML Encoder / Decoder</h3>
-      <textarea
-        rows={5}
-        className="form-control mb-3"
-        placeholder="Enter text here"
-        value={text}
-        onChange={onInputChange}
-      />
+    <div className="html-editor">
+      <div className="html-header">
+        <h2 className="html-title">Code Transformer</h2>
+        <p className="html-subtitle">Encode/Decode HTML Entities</p>
+      </div>
 
-      {!isEncodedHTML && (
-        <button className="btn btn-primary me-2" onClick={encodeHTML}>
-          Encode
-        </button>
-      )}
-
-      {isEncodedHTML && (
-        <button className="btn btn-secondary" onClick={decodeHTML}>
-          Decode
-        </button>
-      )}
-
-      {error && (
-        <div className="alert alert-danger mt-3" role="alert">
-          {error}
+      <div className="html-input-container">
+        <textarea
+          rows={5}
+          className="html-textarea"
+          placeholder="Paste your HTML content here..."
+          value={text}
+          onChange={onInputChange}
+        />
+        <div className="html-action-buttons">
+          {!isEncodedHTML && (
+            <button
+              className="html-button html-button-encode"
+              onClick={encodeHTML}
+            >
+              <span className="html-button-icon">🔒</span>
+              Encode HTML
+            </button>
+          )}
+          {isEncodedHTML && (
+            <button
+              className="html-button html-button-decode"
+              onClick={decodeHTML}
+            >
+              <span className="html-button-icon">🔓</span>
+              Decode HTML
+            </button>
+          )}
         </div>
-      )}
+      </div>
 
-      {encoded && (
-        <div className="mt-3">
-          <strong>Encoded:</strong>
-          <pre className="bg-light p-2 border rounded">{encoded}</pre>
-        </div>
-      )}
+      {error && <div className="html-alert html-alert-error">⚠️ {error}</div>}
 
-      {decoded && (
-        <div className="mt-3">
-          <strong>Decoded:</strong>
-          <pre className="bg-light p-2 border rounded">{decoded}</pre>
+      {(encoded || decoded) && (
+        <div className="html-result">
+          <div className="html-result-header">
+            <h3 className="html-result-title">
+              {encoded ? "Encoded Result" : "Decoded Result"}
+            </h3>
+          </div>
+          <pre className="html-result-content">{encoded || decoded}</pre>
+          <button
+            className="html-copy-button"
+            onClick={() => handleCopy(encoded || decoded)}
+          >
+            {copyStatus ? "Copied!" : "📋 Copy to Clipboard"}
+          </button>
         </div>
       )}
     </div>

@@ -1,0 +1,177 @@
+:root {
+  --gpa-primary: #3b82f6;
+  --gpa-secondary: #6366f1;
+  --gpa-gradient: linear-gradient(
+    135deg,
+    var(--gpa-primary),
+    var(--gpa-secondary)
+  );
+  --gpa-background: #ffffff;
+  --gpa-surface: #ffffff;
+  --gpa-text: #1e293b;
+  --gpa-error: #ef4444;
+  --gpa-success: #10b981;
+}
+
+.gpa-calculator {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: var(--gpa-background);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.gpa-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gpa-title {
+  font-size: 2.5rem;
+  color: var(--gpa-primary);
+  margin-bottom: 0.5rem;
+  background: var(--gpa-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gpa-subtitle {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.gpa-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gpa-input {
+  width: 100%;
+  padding: 1rem;
+  background: #f8fafc;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: var(--gpa-text);
+  transition: all 0.3s ease;
+}
+
+.gpa-input:focus {
+  outline: none;
+  border-color: var(--gpa-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.gpa-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--gpa-gradient);
+  border: none;
+  border-radius: 0.75rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.gpa-button:hover {
+  transform: translateY(-2px);
+}
+
+.gpa-result {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 1rem;
+  border: 2px solid var(--gpa-primary);
+}
+
+.gpa-result-score {
+  font-size: 4rem;
+  font-weight: 700;
+  background: var(--gpa-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0.5rem 0;
+}
+
+.gpa-result-label {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.gpa-result-stars {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.gpa-alert {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.gpa-alert-error {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--gpa-error);
+  border: 1px solid var(--gpa-error);
+}
+
+.gpa-alert-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--gpa-success);
+  border: 1px solid var(--gpa-success);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 640px) {
+  .gpa-calculator {
+    padding: 1.5rem;
+  }
+
+  .gpa-title {
+    font-size: 2rem;
+  }
+
+  .gpa-input-group {
+    flex-direction: column;
+  }
+
+  .gpa-button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .gpa-result-score {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .gpa-calculator {
+    padding: 1rem;
+  }
+
+  .gpa-input {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .gpa-result {
+    padding: 1.5rem;
+  }
+}

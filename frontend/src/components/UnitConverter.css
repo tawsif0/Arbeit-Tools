@@ -1,6 +1,6 @@
 :root {
   --unit-primary: #6c5ce7;
-  --unit-secondary: #a66efa;
+  --unit-secondary: #ff7675;
   --error: #ff4757;
   --glass-bg: rgba(255, 255, 255, 0.95);
   --text-dark: #2d3436;
@@ -13,7 +13,7 @@
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
-  max-width: 500px;
+  max-width: 600px;
   margin: 2rem auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -58,7 +58,6 @@
 
 .converter-input:focus {
   outline: none;
-  border-color: var(--unit-primary);
   box-shadow: 0 0 15px rgba(108, 92, 231, 0.2);
 }
 
@@ -196,14 +195,61 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 768px) {
+  .converter-glass {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .converter-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .unit-selectors {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .swap-btn {
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+  }
+
+  .convert-btn {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .result-card {
+    padding: 1rem;
+  }
+
+  .result-value {
+    font-size: 1.8rem;
+  }
+}
 
 @media (max-width: 480px) {
   .converter-glass {
     margin: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
-  .unit-selectors {
-    gap: 0.5rem;
+  .converter-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .convert-btn {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .result-card {
+    padding: 0.8rem;
+  }
+
+  .result-value {
+    font-size: 1.5rem;
   }
 }

@@ -1,7 +1,7 @@
 // components/GPACalculator.js
 import React, { useState } from "react";
 import axios from "axios";
-
+import "./GPACal.css";
 const GPACalculator = () => {
   const [grades, setGrades] = useState("");
   const [gpa, setGpa] = useState(null);
@@ -19,7 +19,7 @@ const GPACalculator = () => {
         return;
       }
       const res = await axios.post("http://localhost:5000/api/gpa/calculate", {
-        grades: gradeList
+        grades: gradeList,
       });
       setGpa(res.data.gpa);
       setError("");
@@ -30,21 +30,38 @@ const GPACalculator = () => {
   };
 
   return (
-    <div className="card p-4 shadow-sm">
-      <h3>GPA Calculator</h3>
-      <input
-        type="text"
-        className="form-control mb-3"
-        placeholder="Enter grades comma separated, e.g. 3.5,4.0,3.8"
-        value={grades}
-        onChange={(e) => setGrades(e.target.value)}
-      />
-      <button className="btn btn-primary" onClick={calculateGPA}>
-        Calculate GPA
-      </button>
-      {error && <div className="alert alert-danger mt-3">{error}</div>}
+    <div className="gpa-calculator">
+      <div className="gpa-header">
+        <h2 className="gpa-title">Grade Master</h2>
+        <p className="gpa-subtitle">Calculate your GPA in style</p>
+      </div>
+
+      <div className="gpa-input-group">
+        <input
+          type="text"
+          className="gpa-input"
+          placeholder="Enter grades (e.g., 3.5, 4.0, 3.8)..."
+          value={grades}
+          onChange={(e) => setGrades(e.target.value)}
+        />
+        <button className="gpa-button" onClick={calculateGPA}>
+          <span className="gpa-button-text">Calculate</span>
+          <span className="gpa-button-icon">📊</span>
+        </button>
+      </div>
+
+      {error && <div className="gpa-alert gpa-alert-error">{error}</div>}
+
       {gpa !== null && !error && (
-        <div className="alert alert-success mt-3">GPA: {gpa}</div>
+        <div className="gpa-result">
+          <div className="gpa-result-label">Your GPA</div>
+          <div className="gpa-result-score">{gpa}</div>
+          <div className="gpa-result-stars">
+            {Array.from({ length: Math.floor(gpa) }).map((_, i) => (
+              <span key={i}>⭐</span>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
