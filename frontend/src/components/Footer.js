@@ -1,20 +1,11 @@
 /* eslint-disable max-lines */
 import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { MDBFooter, MDBRow, MDBCol, MDBIcon } from "mdb-react-ui-kit";
 import "./Footer.css";
 
 export default function Footer() {
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const handleClick = () => {
-    if (location.pathname !== "/") {
-      navigate("/", { state: { fromFooter: true } });
-    } else {
-      scrollToHero();
-    }
-  };
 
   const scrollToHero = () => {
     const hero = document.getElementById("hero-section");
@@ -68,7 +59,7 @@ export default function Footer() {
         <MDBRow className="">
           {/* Logo Column */}
           <MDBCol lg="6" className="mb-4 footer-col pe-lg-5 align-items-start">
-            <div onClick={handleClick} role="button" className="footer-brand">
+            <div role="button" className="footer-brand">
               <p className="footer-description">
                 Arbeit Technology delivers cutting-edge IT solutions, from
                 custom websites to advanced management systems. We blend

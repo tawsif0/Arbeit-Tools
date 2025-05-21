@@ -46,7 +46,7 @@ const IPLookup = () => {
   };
 
   return (
-    <div className="ip-lookup">
+    <div className="ip-lookup my-5">
       <div className="ip-header">
         <h2 className="ip-title">IP Lookup</h2>
         <p className="ip-subtitle">Uncover the secrets behind any IP address</p>

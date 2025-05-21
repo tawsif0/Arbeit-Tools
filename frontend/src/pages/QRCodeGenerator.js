@@ -78,7 +78,7 @@ const QRCodeGenerator = () => {
   }, [text, dotColor, bgColor, pattern, logoObjectUrl, qrCodeInstance]);
 
   return (
-    <main className="qrgen-wrapper">
+    <main className="qrgen-wrapper my-5">
       <h1 className="qrgen-title">⚡ QR Code Generator ⚡</h1>
 
       <section className="qrgen-inputs">

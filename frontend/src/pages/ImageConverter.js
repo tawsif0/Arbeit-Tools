@@ -52,7 +52,7 @@ const ImageConverter = () => {
   };
 
   return (
-    <div className="image-converter-glass">
+    <div className="image-converter-glass my-5">
       <div className="converter-headers">
         <FiImage className="header-icons" />
         <h2>Image Converter</h2>

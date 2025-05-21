@@ -68,7 +68,7 @@ const Base64EncoderDecoder = () => {
   };
 
   return (
-    <div className="base64-container">
+    <div className="base64-container my-5">
       <div className="base64-glass">
         <div className="base64-header">
           <h1>

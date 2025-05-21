@@ -22,7 +22,7 @@
 }
 
 .navbar__container {
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 1rem 2.5rem;
@@ -43,13 +43,12 @@
   align-items: center;
   gap: 12px;
 }
-.gradient-text {
-  background: linear-gradient(135deg, #8a3ffb 0%, #ff6bda 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
+.navbar__brand img {
+  width: 80px; /* Adjust this value as needed */
+  height: auto;
+  object-fit: contain;
 }
+
 .navbar__title {
   font-size: 1.75rem;
   font-weight: 700;
@@ -239,7 +238,7 @@
 /* Mobile menu panel */
 .navbar__mobile-menu {
   position: fixed;
-  top: 70px;
+  top: 80px;
   left: 0;
   right: 0;
   bottom: 0;

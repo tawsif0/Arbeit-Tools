@@ -37,7 +37,7 @@ const HexToRGBConverter = () => {
   };
 
   return (
-    <div className="rgb-converter-glass">
+    <div className="rgb-converter-glass my-5">
       <div className="rgb-header">
         <FiDroplet className="rgb-header-icon" />
         <h2>Color Alchemist</h2>

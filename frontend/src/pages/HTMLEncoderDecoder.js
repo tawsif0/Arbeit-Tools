@@ -86,7 +86,7 @@ const HTMLEncoderDecoder = () => {
   }, [text]);
 
   return (
-    <div className="html-editor">
+    <div className="html-editor my-5">
       <div className="html-header">
         <h2 className="html-title">Code Transformer</h2>
         <p className="html-subtitle">Encode/Decode HTML Entities</p>

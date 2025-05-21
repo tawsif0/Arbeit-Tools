@@ -49,7 +49,7 @@ const UnitConverter = () => {
   };
 
   return (
-    <div className="converter-glass">
+    <div className="converter-glass my-5">
       <div className="converter-header">
         <FiAirplay className="header-icon" />
         <h2>Unit Converter</h2>

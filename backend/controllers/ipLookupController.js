@@ -14,7 +14,7 @@ exports.lookupIP = async (req, res) => {
     if (response.data.bogon) {
       return res.json({
         message:
-          "This is a private IP address (bogon) and does not have detailed public data.",
+          "This is a private IP address and does not have detailed public data.",
       });
     }
 

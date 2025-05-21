@@ -53,7 +53,7 @@ const PDFConverter = () => {
     }
   };
   return (
-    <div className="pdf-converter-glass">
+    <div className="pdf-converter-glass my-5">
       <div className="pdf-header">
         <FiFileText className="header-icon" />
         <h2>File to PDF Converter</h2>

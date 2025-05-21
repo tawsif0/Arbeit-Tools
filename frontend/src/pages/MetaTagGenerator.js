@@ -43,7 +43,7 @@ const MetaTagGenerator = () => {
   };
 
   return (
-    <div className="meta-generator">
+    <div className="meta-generator my-5">
       <div className="meta-header">
         <h2 className="meta-title">Meta Magic ✨</h2>
         <p className="meta-subtitle">Generate Perfect Meta Tags</p>

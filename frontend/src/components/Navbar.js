@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-
+import logo from "../assets/images/logo.png";
 const Navbar = () => {
   const [desktopOpen, setDesktopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,7 +22,7 @@ const Navbar = () => {
     { to: "/love-calculator", label: "Love Calculator" },
     { to: "/gpa-calculator", label: "GPA Calculator" },
     { to: "/ip-lookup", label: "IP Lookup" },
-    { to: "/pdf-to-word-converter", label: "PDF to Word Converter" }
+    { to: "/pdf-to-word-converter", label: "PDF to Word Converter" },
   ];
 
   useEffect(() => {
@@ -49,7 +49,9 @@ const Navbar = () => {
       <div className="navbar__container">
         <NavLink to="/" className="navbar__brand">
           <span className="navbar__title">
-            <span className="gradient-text">Arbeit</span> Tools
+            <span className="gradient-text">
+              <img src={logo} alt="logo" className="" />
+            </span>
           </span>
         </NavLink>
 

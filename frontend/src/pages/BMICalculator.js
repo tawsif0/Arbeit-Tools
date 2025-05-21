@@ -49,7 +49,7 @@ const BMICalculator = () => {
     return "Obesity 🛑";
   };
   return (
-    <div className="bmi-calculator">
+    <div className="bmi-calculator my-5">
       <div className="bmi-header">
         <h2 className="bmi-title">Body Mass Index Calculator</h2>
         <p className="bmi-subtitle">Know your health status</p>

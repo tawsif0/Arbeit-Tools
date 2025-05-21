@@ -60,7 +60,7 @@ const PdfToWordConverter = () => {
   };
 
   return (
-    <div className="words-converter-glass">
+    <div className="words-converter-glass my-5">
       <div className="words-header">
         <FiFile className="words-header-icon" />
         <h2>Document Alchemist</h2>

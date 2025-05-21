@@ -30,7 +30,7 @@ const GPACalculator = () => {
   };
 
   return (
-    <div className="gpa-calculator">
+    <div className="gpa-calculator my-5">
       <div className="gpa-header">
         <h2 className="gpa-title">Grade Master</h2>
         <p className="gpa-subtitle">Calculate your GPA in style</p>

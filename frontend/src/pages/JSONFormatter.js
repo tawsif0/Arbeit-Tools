@@ -56,7 +56,7 @@ const JSONFormatter = () => {
   }, [input]);
 
   return (
-    <div className="json-formatter">
+    <div className="json-formatter my-5">
       <div className="json-header">
         <h2 className="json-title">JSON Beautifier</h2>
         <p className="json-subtitle">Format & Validate Data into JSON</p>

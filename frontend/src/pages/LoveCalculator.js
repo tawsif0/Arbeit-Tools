@@ -6,23 +6,34 @@ import "./LoveCalculator.css";
 const LoveCalculator = () => {
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
+  const [dob1, setDob1] = useState("");
+  const [dob2, setDob2] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isSpecialMatch, setIsSpecialMatch] = useState(false);
 
   const calculateLove = async () => {
-    if (!name1.trim() || !name2.trim()) {
-      setError("Please enter both names");
+    if (!name1.trim() || !name2.trim() || !dob1 || !dob2) {
+      setError("Please fill all fields");
       setResult(null);
       return;
     }
 
     setIsCalculating(true);
     try {
+      // 1% chance to get 100% compatibility
+      const isLuckyMatch = Math.random() < 0.01;
+      setIsSpecialMatch(isLuckyMatch);
+
       const res = await axios.post("http://localhost:5000/api/love/calculate", {
         name1,
         name2,
+        dob1,
+        dob2,
+        isLuckyMatch,
       });
+
       setResult(res.data.compatibility);
       setError("");
     } catch {
@@ -40,18 +51,36 @@ const LoveCalculator = () => {
       <div className="love-content">
         <div className="love-header">
           <FiHeart className="love-icon" />
-          <h2>Soulmate Spark</h2>
-          <p>Discover Your Cosmic Connection</p>
+          <h2> Love Calculator</h2>
+          <p>Discover your compatibility with your partner</p>
         </div>
 
         <div className="love-inputs">
           <div className="love-input-group">
+            <label htmlFor="name1" className="love-input-label">
+              Your Name
+            </label>
             <input
               type="text"
+              id="name1"
               className="love-input"
               placeholder="Your Name"
               value={name1}
               onChange={(e) => setName1(e.target.value)}
+            />
+            <div className="love-input-decoration"></div>
+          </div>
+
+          <div className="love-input-group">
+            <label htmlFor="dob1" className="love-input-label">
+              Your Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dob1"
+              className="love-input"
+              value={dob1}
+              onChange={(e) => setDob1(e.target.value)}
             />
             <div className="love-input-decoration"></div>
           </div>
@@ -61,12 +90,30 @@ const LoveCalculator = () => {
           </div>
 
           <div className="love-input-group">
+            <label htmlFor="name2" className="love-input-label">
+              Partner's Name
+            </label>
             <input
               type="text"
+              id="name2"
               className="love-input"
               placeholder="Partner's Name"
               value={name2}
               onChange={(e) => setName2(e.target.value)}
+            />
+            <div className="love-input-decoration"></div>
+          </div>
+
+          <div className="love-input-group">
+            <label htmlFor="dob2" className="love-input-label">
+              Partner's Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dob2"
+              className="love-input"
+              value={dob2}
+              onChange={(e) => setDob2(e.target.value)}
             />
             <div className="love-input-decoration"></div>
           </div>
@@ -83,7 +130,7 @@ const LoveCalculator = () => {
             <>
               <span className="love-btn-shine"></span>
               <FiArrowRight className="love-btn-icon" />
-              Ignite the Spark
+              Calculate Compatibility
             </>
           )}
         </button>
@@ -96,16 +143,33 @@ const LoveCalculator = () => {
         )}
 
         {result !== null && !error && (
-          <div className="love-result-card">
+          <div
+            className={`love-result-card ${
+              isSpecialMatch ? "special-match" : ""
+            }`}
+          >
             <div className="love-percentage">{result}%</div>
             <div className="love-compatibility-text">
-              Cosmic Compatibility Score
+              {isSpecialMatch ? (
+                <>
+                  Soulmate Found! 💘
+                  <br />
+                  You're among the 1% perfect matches!
+                </>
+              ) : (
+                "Love Compatibility Score"
+              )}
             </div>
             <div className="love-heart-particles">
-              {[...Array(5)].map((_, i) => (
+              {[...Array(isSpecialMatch ? 15 : 5)].map((_, i) => (
                 <FiHeart key={i} className="love-particle" />
               ))}
             </div>
+            {result > 80 && (
+              <div className="love-zodiac-info">
+                Your signs are highly compatible!
+              </div>
+            )}
           </div>
         )}
       </div>

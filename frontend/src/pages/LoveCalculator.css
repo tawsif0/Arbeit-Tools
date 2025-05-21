@@ -79,6 +79,12 @@
   position: relative;
 }
 
+.love-input-label {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
 .love-input {
   width: 100%;
   padding: 1rem 1.5rem;

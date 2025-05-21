@@ -15,7 +15,7 @@ const WordCharacterCounter = () => {
   const lines = text === "" ? 0 : text.split(/\r\n|\r|\n/).length;
 
   return (
-    <div className="word-counter-container">
+    <div className="word-counter-container my-5">
       <div className="word-counter-glass">
         <h2 className="word-counter-title">
           <FiBook className="title-icon" />

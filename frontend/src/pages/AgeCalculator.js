@@ -55,7 +55,7 @@ const AgeCalculator = () => {
   };
 
   return (
-    <div className="dob-glass-container">
+    <div className="dob-glass-container my-5">
       <div className="dob-header">
         <FiGift className="dob-header-icon" />
         <h2>Time Alchemist</h2>
