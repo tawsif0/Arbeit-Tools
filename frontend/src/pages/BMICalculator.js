@@ -1,38 +1,79 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./BMICalculator.css";
+
 const BMICalculator = () => {
   const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [heightUnit, setHeightUnit] = useState("m"); // default to meters
+  const [weightUnit, setWeightUnit] = useState("kg");
+  const [heightCm, setHeightCm] = useState("");
+  const [heightM, setHeightM] = useState("");
+  const [heightFt, setHeightFt] = useState("");
+  const [heightIn, setHeightIn] = useState("");
+  const [heightUnit, setHeightUnit] = useState("cm"); // default to cm
   const [bmi, setBmi] = useState(null);
   const [error, setError] = useState("");
 
-  // Helper function to convert height to meters
-  const convertHeightToMeters = (height, unit) => {
-    if (unit === "m") {
-      return height; // already in meters
-    } else if (unit === "cm") {
-      return height / 100; // convert cm to meters
-    } else if (unit === "ft") {
-      return height * 0.3048; // convert feet to meters
+  // Convert height to meters based on selected unit
+  const convertHeightToMeters = () => {
+    switch (heightUnit) {
+      case "cm":
+        return heightCm / 100;
+      case "m":
+        return heightM;
+      case "ft":
+        return (
+          parseFloat(heightFt || 0) * 0.3048 +
+          parseFloat(heightIn || 0) * 0.0254
+        );
+      default:
+        return 0;
     }
-    return height;
+  };
+
+  // Convert weight to kg based on selected unit
+  const convertWeightToKg = () => {
+    return weightUnit === "kg"
+      ? parseFloat(weight || 0)
+      : parseFloat(weight || 0) * 0.453592;
+  };
+
+  // Handle inch input - convert to feet if >= 12
+  const handleInchChange = (value) => {
+    let inches = parseFloat(value) || 0;
+    let feet = parseFloat(heightFt) || 0;
+
+    if (inches >= 12) {
+      feet += Math.floor(inches / 12);
+      inches = inches % 12;
+    }
+
+    setHeightFt(feet.toString());
+    setHeightIn(inches.toString());
   };
 
   const calculateBMI = async () => {
-    if (!weight || !height || weight <= 0 || height <= 0) {
-      setError("Please enter valid positive numbers for weight and height.");
+    const heightInMeters = convertHeightToMeters();
+    const weightInKg = convertWeightToKg();
+
+    if (!weight || weight <= 0) {
+      setError("Please enter a valid positive weight.");
       setBmi(null);
       return;
     }
 
-    // Convert height to meters
-    const heightInMeters = convertHeightToMeters(height, heightUnit);
+    if (
+      (heightUnit === "cm" && (!heightCm || heightCm <= 0)) ||
+      (heightUnit === "m" && (!heightM || heightM <= 0)) ||
+      (heightUnit === "ft" && (!heightFt || heightFt <= 0))
+    ) {
+      setError("Please enter valid positive height values.");
+      setBmi(null);
+      return;
+    }
 
     try {
       const res = await axios.post("http://localhost:5000/api/bmi/calculate", {
-        weight: Number(weight),
+        weight: weightInKg,
         height: heightInMeters,
       });
       setBmi(res.data.bmi);
@@ -42,14 +83,16 @@ const BMICalculator = () => {
       setBmi(null);
     }
   };
+
   const getBmiCategory = (bmi) => {
     if (bmi < 18.5) return "Underweight 🌱";
     if (bmi < 25) return "Healthy Weight 🎯";
     if (bmi < 30) return "Overweight ⚠️";
     return "Obesity 🛑";
   };
+
   return (
-    <div className="bmi-calculator my-5">
+    <div className="bmi-calculator">
       <div className="bmi-header">
         <h2 className="bmi-title">Body Mass Index Calculator</h2>
         <p className="bmi-subtitle">Know your health status</p>
@@ -57,40 +100,85 @@ const BMICalculator = () => {
 
       <div className="bmi-input-group">
         <div className="bmi-input-container">
-          <label className="bmi-label">Weight (kg)</label>
-          <input
-            type="number"
-            className="bmi-input"
-            placeholder="Enter weight"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-        </div>
-
-        <div className="bmi-input-container">
-          <label className="bmi-label">Height</label>
-          <div className="bmi-height-group">
+          <label className="bmi-label">Weight</label>
+          <div className="bmi-weight-group">
             <input
               type="number"
               className="bmi-input"
-              placeholder="Enter height"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              placeholder={`Enter weight in ${weightUnit}`}
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
             />
             <div className="bmi-unit-selector">
-              {["m", "cm", "ft"].map((unit) => (
+              {["kg", "lbs"].map((unit) => (
                 <button
                   key={unit}
                   className={`bmi-unit-btn ${
-                    heightUnit === unit ? "active" : ""
+                    weightUnit === unit ? "active" : ""
                   }`}
-                  onClick={() => setHeightUnit(unit)}
+                  onClick={() => setWeightUnit(unit)}
                 >
                   {unit.toUpperCase()}
                 </button>
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="bmi-input-container">
+          <label className="bmi-label">Height</label>
+          <div className="bmi-unit-selector">
+            {["cm", "m", "ft"].map((unit) => (
+              <button
+                key={unit}
+                className={`bmi-unit-btn ${
+                  heightUnit === unit ? "active" : ""
+                }`}
+                onClick={() => setHeightUnit(unit)}
+              >
+                {unit.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          {heightUnit === "cm" && (
+            <input
+              type="number"
+              className="bmi-input"
+              placeholder="Height in centimeters"
+              value={heightCm}
+              onChange={(e) => setHeightCm(e.target.value)}
+            />
+          )}
+
+          {heightUnit === "m" && (
+            <input
+              type="number"
+              className="bmi-input"
+              placeholder="Height in meters"
+              value={heightM}
+              onChange={(e) => setHeightM(e.target.value)}
+            />
+          )}
+
+          {heightUnit === "ft" && (
+            <div className="bmi-height-ft-in">
+              <input
+                type="number"
+                className="bmi-input"
+                placeholder="Feet"
+                value={heightFt}
+                onChange={(e) => setHeightFt(e.target.value)}
+              />
+              <input
+                type="number"
+                className="bmi-input"
+                placeholder="Inches"
+                value={heightIn}
+                onChange={(e) => handleInchChange(e.target.value)}
+              />
+            </div>
+          )}
         </div>
       </div>
 

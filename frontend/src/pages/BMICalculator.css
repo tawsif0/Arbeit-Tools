@@ -1,3 +1,4 @@
+/* BMICalculator.css */
 :root {
   --bmi-primary: #6366f1;
   --bmi-secondary: #10b981;
@@ -71,14 +72,20 @@
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.bmi-height-group {
+.bmi-weight-group,
+.bmi-height-ft-in {
   display: flex;
   gap: 0.5rem;
+}
+
+.bmi-height-ft-in .bmi-input {
+  flex: 1;
 }
 
 .bmi-unit-selector {
   display: flex;
   gap: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .bmi-unit-btn {
@@ -188,11 +195,6 @@
 .bmi-alert.error {
   background: rgba(255, 71, 87, 0.1);
   color: #ff4757;
-}
-
-.bmi-alert.warning {
-  background: rgba(245, 158, 11, 0.2);
-  color: #f59e0b;
 }
 
 @media (max-width: 480px) {
