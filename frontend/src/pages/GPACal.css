@@ -7,14 +7,13 @@
     var(--gpa-secondary)
   );
   --gpa-background: #ffffff;
-  --gpa-surface: #ffffff;
   --gpa-text: #1e293b;
   --gpa-error: #ef4444;
   --gpa-success: #10b981;
 }
 
 .gpa-calculator {
-  max-width: 600px;
+  max-width: 700px;
   margin: 2rem auto;
   padding: 2.5rem;
   background: var(--gpa-background);
@@ -30,8 +29,6 @@
 
 .gpa-title {
   font-size: 2.5rem;
-  color: var(--gpa-primary);
-  margin-bottom: 0.5rem;
   background: var(--gpa-gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -41,6 +38,30 @@
 .gpa-subtitle {
   color: #64748b;
   font-size: 0.9rem;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.toggle-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  color: #64748b;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+  background: var(--gpa-gradient);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
 .gpa-input-group {
@@ -87,35 +108,205 @@
   transform: translateY(-2px);
 }
 
-.gpa-result {
-  text-align: center;
-  margin-top: 2rem;
-  padding: 2rem;
-  background: #f9fafb;
-  border-radius: 1rem;
-  border: 2px solid var(--gpa-primary);
-}
-
-.gpa-result-score {
-  font-size: 4rem;
-  font-weight: 700;
-  background: var(--gpa-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0.5rem 0;
-}
-
-.gpa-result-label {
-  color: #94a3b8;
-  font-size: 1.1rem;
-}
-
-.gpa-result-stars {
-  margin-top: 1rem;
+.advanced-form {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.course-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.course-input,
+.credits-input,
+.grade-select {
+  padding: 0.75rem 0.3rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.course-input:focus,
+.credits-input:focus,
+.grade-select:focus {
+  outline: none;
+  border-color: var(--gpa-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.grade-select {
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.3rem center;
+  background-size: 1rem;
+}
+
+.remove-course {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.remove-course:hover {
+  background: #fecaca;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.add-course {
+  padding: 0.75rem 1.5rem;
+  background: #e0f2fe;
+  color: var(--gpa-primary);
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.add-course:hover {
+  background: #bae6fd;
+}
+.edit-grade-map {
+  display: flex;
+  flex-direction: column;
+}
+
+.grade-map-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+}
+
+.grade-map-entry label {
+  font-weight: 600;
+  color: var(--gpa-text);
+  min-width: 3rem;
+}
+
+.grade-map-entry input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.grade-map-entry input:focus {
+  outline: none;
+  border-color: var(--gpa-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.grade-map-entry .remove-grade {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.grade-map-entry .remove-grade:hover {
+  background: #fecaca;
+}
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .grade-map-entry {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .add-course {
+    font-size: 0.8rem;
+  }
+  .grade-map-entry label {
+    margin-bottom: 0.25rem;
+    text-align: center;
+  }
+
+  .grade-map-entry input {
+    width: 100%;
+  }
+
+  .grade-map-entry .remove-grade {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  padding: 0.75rem 2rem;
+  background: var(--gpa-gradient);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+}
+
+.secondary-btn {
+  padding: 0.75rem 2rem;
+  background: #f1f5f9;
+  color: #64748b;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+  background: #e2e8f0;
 }
 
 .gpa-alert {
@@ -131,47 +322,52 @@
   border: 1px solid var(--gpa-error);
 }
 
-.gpa-alert-success {
-  background: rgba(16, 185, 129, 0.2);
-  color: var(--gpa-success);
-  border: 1px solid var(--gpa-success);
+.gpa-result {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 1rem;
+  border: 2px solid var(--gpa-primary);
 }
 
-/* Mobile Responsive Styles */
+.gpa-result-label {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.gpa-result-score {
+  font-size: 4rem;
+  font-weight: 700;
+  background: var(--gpa-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0.5rem 0;
+}
+
+.gpa-result-stars {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 @media (max-width: 640px) {
   .gpa-calculator {
     padding: 1.5rem;
   }
-
   .gpa-title {
     font-size: 2rem;
   }
-
-  .gpa-input-group {
+  .course-row {
+    grid-template-columns: 1fr;
+  }
+  .action-buttons {
     flex-direction: column;
+    align-items: stretch;
   }
-
-  .gpa-button {
-    width: 100%;
-    padding: 0.75rem;
-  }
-
-  .gpa-result-score {
-    font-size: 3rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .gpa-calculator {
-    padding: 1rem;
-  }
-
-  .gpa-input {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  .gpa-result {
-    padding: 1.5rem;
+  .form-actions {
+    gap: 1rem;
   }
 }
