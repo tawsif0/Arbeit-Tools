@@ -18,7 +18,7 @@ const americanGradeMap = {
   D: 1.0,
   "D-": 0.7,
   F: 0.0,
-  P: 4.0,
+  P: 1.0,
   NP: 0.0,
 };
 
