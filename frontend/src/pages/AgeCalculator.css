@@ -1,196 +1,236 @@
+/* CSS Variables */
 :root {
-  --dob-primary: #6c5ce7;
-  --dob-secondary: #a66efa;
-  --dob-background: #ffffff;
-  --dob-error: #ff4757;
-  --glass-bg: rgba(255, 255, 255, 0.95);
-  --text-dark: #2d3436;
-  --text-light: #636e72;
+  --time-primary: #8a2be2;
+  --time-secondary: #9370db;
+  --time-accent: #ff69b4;
+  --time-background: #ffffff;
+  --time-surface: #f9f4ff;
+  --time-border: #e6d5ff;
+  --time-text: #2e0057;
+  --time-text-light: #6a3cb5;
+  --time-error: #ff4757;
+  --time-success: #20bf6b;
+  --time-shadow: 0 10px 30px rgba(138, 43, 226, 0.15);
+  --time-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.dob-glass-container {
+/* Base Styles */
+.time-capsule {
   position: relative;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 2.5rem;
-  max-width: 500px;
+  background: var(--time-background);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 600px;
   margin: 2rem auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--time-shadow);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  border: 1px solid var(--time-border);
+  z-index: 1;
 }
 
-.dob-header {
+.time-capsule::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(138, 43, 226, 0.05) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  z-index: -1;
+}
+
+.time-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
 }
 
-.dob-header h2 {
-  color: var(--text-dark);
+.time-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    var(--time-primary),
+    var(--time-secondary)
+  );
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+  transition: var(--time-transition);
+}
+
+.time-header h1 {
+  color: var(--time-text);
   margin: 0.5rem 0;
-  font-size: 1.8rem;
-  letter-spacing: 0.1em;
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(
+    to right,
+    var(--time-primary),
+    var(--time-accent)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.dob-header p {
-  color: var(--text-light);
+.time-header p {
+  color: var(--time-text-light);
   margin: 0;
   font-size: 1rem;
+  font-weight: 500;
 }
 
-.dob-header-icon {
-  font-size: 2.5rem;
-  color: var(--dob-primary);
-  filter: drop-shadow(0 4px 6px rgba(108, 92, 231, 0.2));
-}
-
-.dob-inputs {
+/* Input Styles */
+.time-inputs {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   margin: 2rem 0;
 }
 
-.dob-input-group {
+.time-input-group {
   position: relative;
 }
 
-.dob-input {
+.time-input {
   width: 100%;
-  padding: 2rem 1.5rem 2rem 2.5rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  color: var(--text-dark);
-  transition: all 0.3s ease;
-  background: transparent;
+  padding: 1.8rem 1.5rem 1.8rem 3rem;
+  border: 2px solid var(--time-border);
+  border-radius: 14px;
+  font-size: 1rem;
+  color: var(--time-text);
+  transition: var(--time-transition);
+  background: var(--time-surface);
   cursor: pointer;
-  appearance: none; /* Prevent default date picker */
+  appearance: none;
+  font-weight: 500;
 }
 
-.dob-input:focus {
+.time-input:focus {
   outline: none;
-  border-color: var(--dob-primary);
+  border-color: var(--time-primary);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
 }
 
-.dob-input-icon {
+.time-input-icon {
   position: absolute;
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--dob-primary);
+  color: var(--time-primary);
+  font-size: 1.2rem;
 }
 
-.dob-input-label {
+.time-floating-label {
   position: absolute;
-  left: 2.5rem;
+  left: 3rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-light);
+  color: var(--time-text-light);
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: var(--time-transition);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.dob-input:focus + .floating-label {
-  transform: translateY(0);
-  opacity: 1;
+.time-input:focus + .time-floating-label,
+.time-input:not(:placeholder-shown) + .time-floating-label {
+  transform: translateY(-2rem);
+  font-size: 0.8rem;
+  color: var(--time-primary);
 }
 
-.dob-input:focus ~ .dob-input-highlight {
-  width: 100%;
-}
-
-.dob-calculate-btn {
-  background: linear-gradient(45deg, var(--dob-primary), var(--dob-secondary));
+.time-today-btn {
+  position: absolute;
+  right: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--time-primary);
   color: white;
   border: none;
-  padding: 1.2rem 2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.dob-calculate-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
-}
-
-.dob-btn-shine {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.3) 50%,
-    rgba(255, 255, 255, 0) 80%
-  );
-  transform: rotate(-30deg);
-  animation: shine 3s infinite;
-}
-
-.dob-result-card {
-  background: rgba(108, 92, 231, 0.05);
-  padding: 2rem;
-  border-radius: 12px;
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.dob-age-display {
-  text-align: center;
-}
-
-.dob-age-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--dob-primary);
-  display: block;
-}
-
-.dob-age-label {
-  color: var(--text-light);
-  font-size: 0.9rem;
-}
-
-.dob-particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.dob-particle {
-  position: absolute;
-  color: var(--dob-primary);
-  opacity: 0.3;
-  animation: float 3s infinite;
-}
-
-.dob-error-message {
-  background: rgba(255, 71, 87, 0.1);
-  color: var(--dob-error);
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--time-transition);
+}
+
+.time-today-btn:hover {
+  background: var(--time-secondary);
+}
+
+/* Button Styles */
+.time-actions {
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.dob-spinner {
+.time-calculate-btn {
+  flex: 1;
+  padding: 1.5rem;
+  background: linear-gradient(45deg, var(--time-primary), var(--time-accent));
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: var(--time-transition);
+  z-index: 1;
+}
+
+.time-calculate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+}
+
+.time-btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.time-calculate-btn:hover .time-btn-shine {
+  left: 100%;
+}
+
+.time-btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.time-btn-icon {
+  font-size: 1.2rem;
+}
+
+.time-spinner {
   width: 24px;
   height: 24px;
   border: 3px solid rgba(255, 255, 255, 0.3);
@@ -199,101 +239,271 @@
   animation: spin 1s linear infinite;
 }
 
+.time-clear-btn {
+  padding: 0.5rem 1.5rem;
+  background: var(--time-surface);
+  color: var(--time-text-light);
+  border: 2px solid var(--time-border);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--time-transition);
+}
+
+.time-clear-btn:hover {
+  background: #f0e5ff;
+  color: var(--time-primary);
+}
+
+/* Result Styles */
+.time-result-card {
+  background: var(--time-surface);
+  padding: 2rem;
+  border-radius: 18px;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--time-border);
+}
+
+.time-age-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.time-age-item {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.1);
+  transition: var(--time-transition);
+}
+
+.time-age-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(138, 43, 226, 0.15);
+}
+
+.time-age-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--time-primary);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(
+    to right,
+    var(--time-primary),
+    var(--time-accent)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.time-age-label {
+  color: var(--time-text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.time-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.time-particle {
+  position: absolute;
+  color: var(--time-primary);
+  opacity: 0.3;
+  font-size: 1.2rem;
+}
+
+/* Details Section */
+.time-details-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--time-text);
+  transition: var(--time-transition);
+  border: 1px solid var(--time-border);
+  z-index: 1;
+  position: relative;
+}
+
+.time-details-toggle:hover {
+  background: #f9f4ff;
+  color: var(--time-primary);
+}
+
+.time-details-icon {
+  transition: var(--time-transition);
+  color: var(--time-primary);
+}
+
+.time-details-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.time-details {
+  margin-top: 1rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--time-border);
+}
+
+.time-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px dashed var(--time-border);
+}
+
+.time-detail-item:last-child {
+  border-bottom: none;
+}
+
+.time-detail-label {
+  color: var(--time-text-light);
+  font-weight: 500;
+}
+
+.time-detail-value {
+  color: var(--time-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Error Message */
+.time-error-message {
+  background: rgba(255, 71, 87, 0.1);
+  color: var(--time-error);
+  padding: 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  border: 1px solid var(--time-error);
+}
+
+.time-error-icon {
+  font-size: 1.2rem;
+}
+
+/* Animations */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes shine {
-  0% {
-    left: -50%;
-  }
-  100% {
-    left: 150%;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(20deg);
-  }
-}
-
-/* Mobile responsiveness */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .dob-glass-container {
-    padding: 1.5rem;
-    margin: 1.5rem;
+  .time-capsule {
+    padding: 2rem;
   }
 
-  .dob-header h2 {
+  .time-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .time-icon {
+    width: 60px;
+    height: 60px;
     font-size: 1.5rem;
   }
 
-  .dob-header p {
-    font-size: 0.9rem;
+  .time-input {
+    padding: 1.5rem 1rem 1.5rem 2.8rem;
   }
 
-  .dob-input-group {
+  .time-actions {
     flex-direction: column;
+  }
+
+  .time-calculate-btn {
+    width: 100%;
+  }
+
+  .time-age-display {
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .dob-input {
-    padding: 1.5rem 1rem 1.5rem 2.5rem;
-  }
-
-  .dob-calculate-btn {
-    padding: 1rem;
-    font-size: 1rem;
-  }
-
-  .dob-result-card {
-    grid-template-columns: 1fr; /* Stack the result cards in a single column */
-  }
-
-  .dob-age-number {
-    font-size: 1.5rem;
-  }
-
-  .dob-age-label {
-    font-size: 0.8rem;
+  .time-age-number {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .dob-glass-container {
-    padding: 1rem;
-    margin: 1rem;
+  .time-today-btn {
+    right: 3rem;
+  }
+  .time-capsule {
+    padding: 1.5rem;
+    border-radius: 18px;
   }
 
-  .dob-header h2 {
-    font-size: 1.3rem;
+  .time-header h1 {
+    font-size: 1.6rem;
   }
 
-  .dob-header p {
-    font-size: 0.8rem;
-  }
-
-  .dob-calculate-btn {
+  .time-header p {
     font-size: 0.9rem;
-    padding: 0.8rem;
   }
 
-  .dob-result-card {
-    padding: 1rem;
+  .time-input {
+    padding: 1.2rem 1rem 1.2rem 2.5rem;
+    font-size: 0.9rem;
   }
 
-  .dob-age-number {
-    font-size: 1.25rem;
+  .time-floating-label {
+    font-size: 0.8rem;
+    left: 2.5rem;
   }
 
-  .dob-age-label {
-    font-size: 0.75rem;
+  .time-input:focus + .time-floating-label,
+  .time-input:not(:placeholder-shown) + .time-floating-label {
+    transform: translateY(-1.8rem);
+  }
+
+  .time-today-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .time-calculate-btn {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .time-age-number {
+    font-size: 1.8rem;
+  }
+
+  .time-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 }
