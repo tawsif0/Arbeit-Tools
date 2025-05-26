@@ -23,7 +23,7 @@ const HexToRGBConverter = () => {
     setIsConverting(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/hex/convert",
+        "https://toolsapi.arbeittechnology.com/api/hex/convert",
         { hex }
       );
       setRgb(response.data.rgb);

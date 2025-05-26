@@ -44,7 +44,7 @@ const Base64EncoderDecoder = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/base64/${type}`,
+        `https://toolsapi.arbeittechnology.com/api/base64/${type}`,
         { input: input.trim() }
       );
       type === "encode"

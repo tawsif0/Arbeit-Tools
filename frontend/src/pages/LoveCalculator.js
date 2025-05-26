@@ -26,13 +26,16 @@ const LoveCalculator = () => {
       const isLuckyMatch = Math.random() < 0.01;
       setIsSpecialMatch(isLuckyMatch);
 
-      const res = await axios.post("http://localhost:5000/api/love/calculate", {
-        name1,
-        name2,
-        dob1,
-        dob2,
-        isLuckyMatch,
-      });
+      const res = await axios.post(
+        "https://toolsapi.arbeittechnology.com/api/love/calculate",
+        {
+          name1,
+          name2,
+          dob1,
+          dob2,
+          isLuckyMatch,
+        }
+      );
 
       setResult(res.data.compatibility);
       setError("");

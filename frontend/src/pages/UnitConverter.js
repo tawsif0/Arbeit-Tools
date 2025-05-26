@@ -29,11 +29,14 @@ const UnitConverter = () => {
 
     setIsConverting(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/unit/convert", {
-        input: Number(input),
-        fromUnit,
-        toUnit,
-      });
+      const res = await axios.post(
+        "https://toolsapi.arbeittechnology.com/api/unit/convert",
+        {
+          input: Number(input),
+          fromUnit,
+          toUnit,
+        }
+      );
       setResult(res.data.result);
       setError("");
     } catch (err) {

@@ -35,7 +35,7 @@ const PDFConverter = () => {
       formData.append("file", file);
 
       const response = await axios.post(
-        "http://localhost:5000/api/pdf/generate",
+        "https://toolsapi.arbeittechnology.com/api/pdf/generate",
         formData,
         { responseType: "blob" }
       );

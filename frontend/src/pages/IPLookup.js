@@ -28,9 +28,12 @@ const IPLookup = () => {
 
     setError("");
     try {
-      const res = await axios.post("http://localhost:5000/api/ip/lookup", {
-        ip,
-      });
+      const res = await axios.post(
+        "https://toolsapi.arbeittechnology.com/api/ip/lookup",
+        {
+          ip,
+        }
+      );
 
       if (res.data.message) {
         setResult({ message: res.data.message });

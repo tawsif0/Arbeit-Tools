@@ -48,10 +48,13 @@ const AgeCalculator = () => {
         ? parseDateForBackend(customDate) // Custom date already in yyyy-mm-dd format
         : "";
 
-      const res = await axios.post("http://localhost:5000/api/age/calculate", {
-        dob: parsedDob,
-        customDate: parsedCustomDate,
-      });
+      const res = await axios.post(
+        "https://toolsapi.arbeittechnology.com/api/age/calculate",
+        {
+          dob: parsedDob,
+          customDate: parsedCustomDate,
+        }
+      );
 
       setAge(res.data);
       setError("");

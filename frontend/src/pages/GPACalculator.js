@@ -221,9 +221,12 @@ const GPACalculator = () => {
         return;
       }
 
-      const res = await axios.post("http://localhost:5000/api/gpa/calculate", {
-        courses: allValidCourses,
-      });
+      const res = await axios.post(
+        "https://toolsapi.arbeittechnology.com/api/gpa/calculate",
+        {
+          courses: allValidCourses,
+        }
+      );
 
       // Ensure the GPA is a number before setting state
       const calculatedGPA =

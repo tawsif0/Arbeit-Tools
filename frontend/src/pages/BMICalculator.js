@@ -285,21 +285,21 @@ const BMICalculator = () => {
                 <div className="bmi-scale">
                   <span
                     style={{
-                      left: `${pos185}%`
+                      left: `${pos185}%`,
                     }}
                   >
                     18.5
                   </span>
                   <span
                     style={{
-                      left: `${pos25}%`
+                      left: `${pos25}%`,
                     }}
                   >
                     25
                   </span>
                   <span
                     style={{
-                      left: `${pos30}%`
+                      left: `${pos30}%`,
                     }}
                   >
                     30
